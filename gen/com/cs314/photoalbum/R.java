@@ -24,12 +24,34 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_settings=0x7f080001;
-        public static final int addAlbum=0x7f080002;
+        public static final int action_settings=0x7f080005;
+        public static final int addAlbum=0x7f080004;
+        public static final int image_detail=0x7f080003;
+        public static final int image_detail_container=0x7f080001;
+        public static final int image_list=0x7f080002;
         public static final int listview=0x7f080000;
     }
     public static final class layout {
         public static final int activity_album=0x7f030000;
+        public static final int activity_image_detail=0x7f030001;
+        /** 
+    Layout alias to replace the single-pane version of the layout with a
+    two-pane version on Large screens.
+
+    For more on layout aliases, see:
+    http://developer.android.com/training/multiscreen/screensizes.html#TaskUseAliasFilters
+    
+
+    Layout alias to replace the single-pane version of the layout with a
+    two-pane version on Large screens.
+
+    For more on layout aliases, see:
+    http://developer.android.com/training/multiscreen/screensizes.html#TaskUseAliasFilters
+    
+         */
+        public static final int activity_image_list=0x7f030002;
+        public static final int activity_image_twopane=0x7f030003;
+        public static final int fragment_image_detail=0x7f030004;
     }
     public static final class menu {
         public static final int album=0x7f070000;
@@ -38,6 +60,8 @@ public final class R {
         public static final int action_settings=0x7f050001;
         public static final int app_name=0x7f050000;
         public static final int hello_world=0x7f050002;
+        public static final int title_image_detail=0x7f050004;
+        public static final int title_image_list=0x7f050003;
     }
     public static final class style {
         /** 
