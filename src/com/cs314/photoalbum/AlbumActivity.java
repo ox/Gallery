@@ -85,7 +85,6 @@ public class AlbumActivity extends Activity {
     return true;
   }
   
-
   private class StableArrayAdapter extends ArrayAdapter<String> {
     HashMap<String, Integer> mIdMap = new HashMap<String, Integer>();
 
