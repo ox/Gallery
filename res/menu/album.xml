@@ -2,9 +2,10 @@
 
     <item 
         android:id="@+id/addAlbum" 
-        android:title="Add Album..."
+        android:title="@string/add_album"
         android:showAsAction="never" 
-        android:orderInCategory="100"/>
+        android:orderInCategory="100"
+       />
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="200"

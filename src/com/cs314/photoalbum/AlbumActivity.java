@@ -1,30 +1,24 @@
 package com.cs314.photoalbum;
 
-import java.io.File;
-import java.io.FileFilter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
-import java.util.Set;
 
-import android.net.Uri;
-import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore.MediaColumns;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.util.AttributeSet;
+import android.net.Uri;
+import android.os.Bundle;
+import android.provider.MediaStore.MediaColumns;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -83,6 +77,28 @@ public class AlbumActivity extends Activity {
     // Inflate the menu; this adds items to the action bar if it is present.
     getMenuInflater().inflate(R.menu.album, menu);
     return true;
+  }
+  public boolean onOptionsItemSelected(MenuItem item) {
+	    // Handle item selection
+	    switch (item.getItemId()) {
+	    case R.id.addAlbum:
+	    	albumDialog();
+	        return true;
+	    default:
+	        return super.onOptionsItemSelected(item);
+	    }
+	}
+ 
+  public void albumDialog() {
+	  final Dialog dialog = new Dialog(this);
+	  dialog.setContentView(R.layout.album_dialog);
+	  dialog.setTitle("Create New Album");
+	  dialog.show();
+  }
+  
+  public void addToList(View view) {
+	  EditText editText = (EditText) findViewById(R.id.edit_album);
+	  String newAlbumName = editText.getText().toString();
   }
   
   private class StableArrayAdapter extends ArrayAdapter<String> {
