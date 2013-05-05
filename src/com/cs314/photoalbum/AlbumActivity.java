@@ -3,6 +3,8 @@ package com.cs314.photoalbum;
 import java.io.File;
 import java.io.FileFilter;
 import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.Set;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,35 +20,37 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 public class AlbumActivity extends Activity {
-
+  Hashtable<String, ArrayList<String>> albums = new Hashtable<String, ArrayList<String>>();
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_album);
 
-    ArrayList<String> listOfAllImages = new ArrayList<String>();
-    String absolutePathOfImage = null;
+    String absolutePathOfImage = null, albumFilePath = null;
     Uri uri = android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
-
-    String[] projection = { MediaColumns.DATA,
-        MediaColumns.DISPLAY_NAME};
+    String[] projection = { MediaColumns.DATA, MediaColumns.DISPLAY_NAME};
 
     Cursor cursor = this.managedQuery(uri, projection, null, null, null);
-    ArrayList<String> albumFolders = new ArrayList<String>();
-    
     int column_index = cursor.getColumnIndexOrThrow(MediaColumns.DATA);
     while (cursor.moveToNext()) {
       absolutePathOfImage = cursor.getString(column_index);
-      absolutePathOfImage = absolutePathOfImage.replaceAll("^(.*)\\/(\\w*\\/.*?\\.(?:jpg|png))$", "$2");
-      String[] folderFilePair = absolutePathOfImage.split("/");
+      albumFilePath = absolutePathOfImage.replaceAll("^(.*)\\/(\\w*\\/.*?\\.(?:jpg|png))$", "$2");
+      String[] folderFilePair = albumFilePath.split("/");
       
-      if (!albumFolders.contains(folderFilePair[0]) && !folderFilePair[0].isEmpty()) {
-        albumFolders.add(folderFilePair[0]);
-        System.err.println("sourced from: " + absolutePathOfImage);
+      if (!folderFilePair[0].isEmpty()) {
+        ArrayList<String> album = albums.get(folderFilePair[0]);
+        if (album == null) {
+          album = new ArrayList<String>();
+        }
+        
+        album.add(absolutePathOfImage);
+        albums.put(folderFilePair[0], album);
       }
-      
-      listOfAllImages.add(absolutePathOfImage);
+    }
+    
+    for (String key : albums.keySet()) {
+      System.err.println("album: " + key);
     }
   }
 
