@@ -16,12 +16,17 @@ import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.util.AttributeSet;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class AlbumActivity extends Activity {
   Hashtable<String, ArrayList<String>> albums = new Hashtable<String, ArrayList<String>>();
@@ -53,7 +58,7 @@ public class AlbumActivity extends Activity {
       }
     }
 
-    ArrayList<String> albumNames = new ArrayList<String>();
+    final ArrayList<String> albumNames = new ArrayList<String>();
     for (String key : albums.keySet()) {
       albumNames.add(key);
     }
@@ -62,6 +67,15 @@ public class AlbumActivity extends Activity {
     final StableArrayAdapter adapter = new StableArrayAdapter(this,
         android.R.layout.simple_list_item_1, albumNames);
     listview.setAdapter(adapter);
+    
+    listview.setOnItemClickListener(new OnItemClickListener() {
+      @Override
+      public void onItemClick(AdapterView<?> parent, View view, int position,
+          long id) {
+        Toast.makeText(getApplicationContext(),
+             albumNames.get(position), Toast.LENGTH_SHORT).show();
+      }
+    }); 
   }
 
   @Override
@@ -70,9 +84,9 @@ public class AlbumActivity extends Activity {
     getMenuInflater().inflate(R.menu.album, menu);
     return true;
   }
+  
 
   private class StableArrayAdapter extends ArrayAdapter<String> {
-
     HashMap<String, Integer> mIdMap = new HashMap<String, Integer>();
 
     public StableArrayAdapter(Context context, int textViewResourceId,
