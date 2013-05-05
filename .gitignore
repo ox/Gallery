@@ -1,3 +1,4 @@
 .class
+bin
 bin/classes/com
 bin/classes/**/*.class
