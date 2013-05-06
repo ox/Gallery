@@ -6,8 +6,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
+import android.view.ContextMenu;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ContextMenu.ContextMenuInfo;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
 /**
  * An activity representing a list of Images. This activity has different
@@ -28,6 +35,7 @@ public class ImageListActivity extends FragmentActivity implements
     ImageListFragment.Callbacks {
   
   private ArrayList<String> photoPaths;
+  private String selectedWord;
 
   /**
    * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -53,6 +61,7 @@ public class ImageListActivity extends FragmentActivity implements
       // 'activated' state when touched.
       ((ImageListFragment) getSupportFragmentManager().findFragmentById(
           R.id.image_list)).setActivateOnItemClick(true);
+      
     }
 
     Intent intent = getIntent();
@@ -64,8 +73,22 @@ public class ImageListActivity extends FragmentActivity implements
     
     ((ImageListFragment) getSupportFragmentManager().findFragmentById(
         R.id.image_list)).setListAdapter(adapter);
+    
   }
-
+  public boolean onCreateOptionsMenu(Menu menu) {
+	    // Inflate the menu; this adds items to the action bar if it is present.
+	    getMenuInflater().inflate(R.menu.photo, menu);
+	    return true;
+	  }
+  
+  public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
+      // TODO Auto-generated method stub
+	  super.onCreateContextMenu(menu, v, menuInfo);  
+	  AdapterView.AdapterContextMenuInfo info =(AdapterView.AdapterContextMenuInfo) menuInfo;
+	  selectedWord = ((TextView) info.targetView).getText().toString();
+	  MenuInflater inflater = getMenuInflater();
+	  inflater.inflate(R.menu.photoremove, menu);
+  }
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
     System.err.println("item: " + item.toString());

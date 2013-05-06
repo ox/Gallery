@@ -118,6 +118,8 @@ public class AlbumActivity extends Activity {
 			  EditText editText = (EditText) dialog.findViewById(R.id.new_album);
 			  String newAlbumName = editText.getText().toString();
 			  albumNames.add(newAlbumName);
+			  ArrayList<String> t1 = new ArrayList<String>();
+			  albums.put(newAlbumName, t1);
 			  adapter.notifyDataSetChanged();
 			  dialog.dismiss();
 			}

@@ -12,4 +12,5 @@
  	<string name="delete">Delete</string>
  	<string name="title_image_list">Images</string>
     <string name="title_image_detail">Image Detail</string>
+    <string name="a_photo">Add Photo</string>
 </resources>	
