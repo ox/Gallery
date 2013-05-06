@@ -1,17 +1,23 @@
 package com.cs314.photoalbum;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
 import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
@@ -36,6 +42,8 @@ public class ImageListActivity extends FragmentActivity implements
   
   private ArrayList<String> photoPaths;
   private String selectedWord;
+  private Bitmap bitmap;
+  private static final int REQUEST_CODE = 1;
 
   /**
    * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -102,14 +110,42 @@ public class ImageListActivity extends FragmentActivity implements
         //
         NavUtils.navigateUpFromSameTask(this);
         return true;
+      case R.id.addPhoto: 	
+    	  Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+    	  intent.setType("image/*");
+    	  intent.setAction(Intent.ACTION_GET_CONTENT);
+          intent.addCategory(Intent.CATEGORY_OPENABLE);
+          startActivityForResult(intent,REQUEST_CODE);
+          return true;
+      default:
+          return false;
     }
-    return super.onOptionsItemSelected(item);
+    //return super.onOptionsItemSelected(item);
   }
 
   /**
    * Callback method from {@link ImageListFragment.Callbacks} indicating that
    * the item with the given ID was selected.
    */
+  @Override
+  public void onActivityResult(int requestCode, int resultCode, Intent data) {
+      if (requestCode == 1 && resultCode == Activity.RESULT_OK)
+          try {
+              // We need to recyle unused bitmaps
+              if (bitmap != null) {
+                  bitmap.recycle();
+              }
+              InputStream stream = getContentResolver().openInputStream(
+                      data.getData());
+              bitmap = BitmapFactory.decodeStream(stream);
+              stream.close();
+          } catch (FileNotFoundException e) {
+              e.printStackTrace();
+          } catch (IOException e) {
+              e.printStackTrace();
+          }
+      super.onActivityResult(requestCode, resultCode, data);
+  }
   @Override
   public void onItemSelected(long id) {
     System.err.println("selected id: " + id);

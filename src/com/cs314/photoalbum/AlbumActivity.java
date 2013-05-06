@@ -124,7 +124,7 @@ public class AlbumActivity extends Activity {
 			  albumNames.add(newAlbumName);
 			  ArrayList<String> t1 = new ArrayList<String>();
 			  albums.put(newAlbumName, t1);
-			  
+
 			  adapter.notifyDataSetChanged();
 			  dialog.dismiss();
 			}
