@@ -44,7 +44,7 @@ public class ImageListFragment extends ListFragment {
     /**
      * Callback for when an item has been selected.
      */
-    public void onItemSelected(String id);
+    public void onItemSelected(long id);
   }
 
   /**
@@ -53,8 +53,7 @@ public class ImageListFragment extends ListFragment {
    */
   private static Callbacks sDummyCallbacks = new Callbacks() {
     @Override
-    public void onItemSelected(String id) {
-    }
+    public void onItemSelected(long id) {}
   };
 
   /**
@@ -84,7 +83,7 @@ public class ImageListFragment extends ListFragment {
   @Override
   public void onAttach(Activity activity) {
     super.onAttach(activity);
-
+    
     // Activities containing this fragment must implement its callbacks.
     if (!(activity instanceof Callbacks)) {
       throw new IllegalStateException(
@@ -106,10 +105,10 @@ public class ImageListFragment extends ListFragment {
   public void onListItemClick(ListView listView, View view, int position,
       long id) {
     super.onListItemClick(listView, view, position, id);
-
+    
     // Notify the active callbacks interface (the activity, if the
     // fragment is attached to one) that an item has been selected.
-//    mCallbacks.onItemSelected(DummyContent.ITEMS.get(position).id);
+    mCallbacks.onItemSelected(position);
   }
 
   @Override

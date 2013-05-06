@@ -26,6 +26,8 @@ import android.widget.ArrayAdapter;
  */
 public class ImageListActivity extends FragmentActivity implements
     ImageListFragment.Callbacks {
+  
+  private ArrayList<String> photoPaths;
 
   /**
    * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -55,7 +57,7 @@ public class ImageListActivity extends FragmentActivity implements
 
     Intent intent = getIntent();
     Bundle photos = intent.getExtras();
-    ArrayList<String> photoPaths = photos.getStringArrayList("photos");
+    photoPaths = photos.getStringArrayList("photos");
     
     final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
         android.R.layout.simple_list_item_1, photoPaths);
@@ -66,6 +68,7 @@ public class ImageListActivity extends FragmentActivity implements
 
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
+    System.err.println("item: " + item.toString());
     switch (item.getItemId()) {
       case android.R.id.home:
         // This ID represents the Home or Up button. In the case of this
@@ -86,14 +89,14 @@ public class ImageListActivity extends FragmentActivity implements
    * the item with the given ID was selected.
    */
   @Override
-  public void onItemSelected(String id) {
+  public void onItemSelected(long id) {
     System.err.println("selected id: " + id);
     if (mTwoPane) {
       // In two-pane mode, show the detail view in this activity by
       // adding or replacing the detail fragment using a
       // fragment transaction.
       Bundle arguments = new Bundle();
-      arguments.putString(ImageDetailFragment.ARG_ITEM_ID, id);
+      arguments.putString(ImageDetailFragment.ARG_ITEM_ID, photoPaths.get((int) id));
       ImageDetailFragment fragment = new ImageDetailFragment();
       fragment.setArguments(arguments);
       getSupportFragmentManager().beginTransaction()
@@ -103,7 +106,7 @@ public class ImageListActivity extends FragmentActivity implements
       // In single-pane mode, simply start the detail activity
       // for the selected item ID.
       Intent detailIntent = new Intent(this, ImageDetailActivity.class);
-      detailIntent.putExtra(ImageDetailFragment.ARG_ITEM_ID, id);
+      detailIntent.putExtra(ImageDetailFragment.ARG_ITEM_ID, photoPaths.get((int) id));
       startActivity(detailIntent);
     }
   }

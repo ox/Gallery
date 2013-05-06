@@ -22,7 +22,7 @@ public class ImageDetailActivity extends FragmentActivity {
     setContentView(R.layout.activity_image_detail);
 
     // Show the Up button in the action bar.
-    getActionBar().setDisplayHomeAsUpEnabled(true);
+    // getActionBar().setDisplayHomeAsUpEnabled(true);
 
     // savedInstanceState is non-null when there is fragment state
     // saved from previous configurations of this activity
