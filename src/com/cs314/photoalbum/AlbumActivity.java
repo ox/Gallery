@@ -14,6 +14,7 @@ import android.os.Environment;
 import android.provider.MediaStore.MediaColumns;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.util.AttributeSet;
@@ -30,6 +31,7 @@ import android.widget.Toast;
 
 public class AlbumActivity extends Activity {
   Hashtable<String, ArrayList<String>> albums = new Hashtable<String, ArrayList<String>>();
+  Context context = this;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +76,12 @@ public class AlbumActivity extends Activity {
           long id) {
         Toast.makeText(getApplicationContext(),
              albumNames.get(position), Toast.LENGTH_SHORT).show();
+        
+        ArrayList<String> photos = albums.get(albumNames.get(position));
+        
+        Intent albumDetailIntent = new Intent(context, ImageListActivity.class);
+        albumDetailIntent.putExtra("photos", photos);
+        startActivity(albumDetailIntent);
       }
     }); 
   }

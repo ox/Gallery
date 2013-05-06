@@ -2,3 +2,4 @@
 bin
 bin/classes/com
 bin/classes/**/*.class
+.DS_Store

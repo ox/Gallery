@@ -4,5 +4,7 @@
     <string name="app_name">Photo Album</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_image_list">Images</string>
+    <string name="title_image_detail">Image Detail</string>
 
 </resources>
