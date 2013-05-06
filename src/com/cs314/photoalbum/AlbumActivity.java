@@ -1,5 +1,7 @@
 package com.cs314.photoalbum;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
@@ -58,7 +60,6 @@ public class AlbumActivity extends Activity {
         if (album == null) {
           album = new ArrayList<String>();
         }
-
         album.add(absolutePathOfImage);
         albums.put(folderFilePair[0], album);
       }
@@ -123,6 +124,7 @@ public class AlbumActivity extends Activity {
 			  albumNames.add(newAlbumName);
 			  ArrayList<String> t1 = new ArrayList<String>();
 			  albums.put(newAlbumName, t1);
+			  
 			  adapter.notifyDataSetChanged();
 			  dialog.dismiss();
 			}

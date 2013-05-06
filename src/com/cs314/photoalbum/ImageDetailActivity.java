@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 /**
  * An activity representing a single Image detail screen. This activity is only
@@ -23,6 +24,8 @@ import android.widget.EditText;
  * a {@link ImageDetailFragment}.
  */
 public class ImageDetailActivity extends FragmentActivity {
+	public String locationTag;
+	public ArrayList<String> peopleTags = new ArrayList<String>();
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +64,23 @@ public class ImageDetailActivity extends FragmentActivity {
     		final Dialog dialog = new Dialog(this);
     		  dialog.setContentView(R.layout.add_tag);
     		  dialog.setTitle("Add Tag");
-    		  Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
+    		  Button dialogButton = (Button) dialog.findViewById(R.id.tagOKbutton);
+    		  dialogButton.setOnClickListener(new OnClickListener() {
+    			  @Override
+    				public void onClick(View v) {
+    				  EditText editText = (EditText) dialog.findViewById(R.id.location_tag);
+    				  String locationInput = editText.getText().toString();
+    				  if(locationInput!="")
+    					  locationTag=locationInput;
+    				  EditText editText2 = (EditText) dialog.findViewById(R.id.people_tag);
+    				  String peopleInput = editText2.getText().toString();
+    				  if (peopleInput!="")
+    					  peopleTags.add(peopleInput);
+    				  dialog.dismiss();
+    				  Toast.makeText(getApplicationContext(),
+    				             locationTag, Toast.LENGTH_SHORT).show();
+    				}
+    		  });
     		  dialog.show();
     		  return true;
 	    case android.R.id.home:

@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/p_tag" />
     <Button
-        android:id="@+id/dialogButtonOK"
+        android:id="@+id/tagOKbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_ok" 
