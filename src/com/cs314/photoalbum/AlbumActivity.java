@@ -13,7 +13,10 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore.MediaColumns;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -23,6 +26,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class AlbumActivity extends Activity {
@@ -31,7 +35,8 @@ public class AlbumActivity extends Activity {
   public ArrayList<String> albumNames = new ArrayList<String>();
   public ListView listview;
   public ArrayAdapter<String> adapter;
-
+  public String selectedWord;
+  
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -67,7 +72,7 @@ public class AlbumActivity extends Activity {
     adapter = new ArrayAdapter<String>(this,
         android.R.layout.simple_list_item_1, albumNames);
     listview.setAdapter(adapter);
-   
+    registerForContextMenu(listview);
     
     listview.setOnItemClickListener(new OnItemClickListener() {
       @Override
@@ -110,7 +115,7 @@ public class AlbumActivity extends Activity {
 	  dialogButton.setOnClickListener(new OnClickListener() {
 		  @Override
 			public void onClick(View v) {
-			  EditText editText = (EditText) dialog.findViewById(R.id.edit_album);
+			  EditText editText = (EditText) dialog.findViewById(R.id.new_album);
 			  String newAlbumName = editText.getText().toString();
 			  albumNames.add(newAlbumName);
 			  adapter.notifyDataSetChanged();
@@ -119,7 +124,49 @@ public class AlbumActivity extends Activity {
 	  });
 	  dialog.show();
   }
+  public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
+      // TODO Auto-generated method stub
+	  super.onCreateContextMenu(menu, v, menuInfo);  
+	  AdapterView.AdapterContextMenuInfo info =(AdapterView.AdapterContextMenuInfo) menuInfo;
+	  selectedWord = ((TextView) info.targetView).getText().toString();
+	  MenuInflater inflater = getMenuInflater();
+	  inflater.inflate(R.menu.edit, menu);
+  }
   
+  public boolean onContextItemSelected(MenuItem item) {  
+	  switch (item.getItemId()) {
+      case R.id.option1: //edit
+    	  editDialog(); 
+          return true;
+      case R.id.option2: //delete	
+    	  albumNames.remove(selectedWord);
+    	  adapter.notifyDataSetChanged();
+          return true;
+      default:
+          return false;
+	  }
+  }  
+  public void editDialog() {
+	  final Dialog dialog = new Dialog(this);
+	  dialog.setContentView(R.layout.edit_dialog);
+	  dialog.setTitle("Edit Item Title");
+	  Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
+	  dialogButton.setOnClickListener(new OnClickListener() {
+		  @Override
+			public void onClick(View v) {
+			  EditText editText = (EditText) dialog.findViewById(R.id.new_title);
+			  String newTitle = editText.getText().toString();
+			  ArrayList<String>temp = albums.get(selectedWord);
+			  albums.remove(selectedWord);
+			  albums.put(newTitle, temp);
+			  albumNames.remove(selectedWord);
+			  albumNames.add(newTitle);
+			  adapter.notifyDataSetChanged();
+			  dialog.dismiss();
+			}
+	  });
+	  dialog.show();
+  }  
   private class StableArrayAdapter extends ArrayAdapter<String> {
     HashMap<String, Integer> mIdMap = new HashMap<String, Integer>();
 
