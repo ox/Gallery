@@ -112,13 +112,6 @@ public class AlbumActivity extends Activity {
 	  dialog.show();
   }
   
-  public void addToList(View view) {
-	  //EditText editText = (EditText) findViewById(R.id.edit_album);
-	  //String newAlbumName = editText.getText().toString();
-	  albumNames.add("testicles");
-	  adapter.notifyDataSetChanged();
-  }
-  
   private class StableArrayAdapter extends ArrayAdapter<String> {
     HashMap<String, Integer> mIdMap = new HashMap<String, Integer>();
 
