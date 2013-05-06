@@ -1,10 +1,18 @@
 package com.cs314.photoalbum;
 
+import java.util.ArrayList;
+
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
 
 /**
  * An activity representing a single Image detail screen. This activity is only
@@ -49,17 +57,33 @@ public class ImageDetailActivity extends FragmentActivity {
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()) {
-      case android.R.id.home:
-        // This ID represents the Home or Up button. In the case of this
-        // activity, the Up button is shown. Use NavUtils to allow users
-        // to navigate up one level in the application structure. For
-        // more details, see the Navigation pattern on Android Design:
-        //
-        // http://developer.android.com/design/patterns/navigation.html#up-vs-back
-        //
-        NavUtils.navigateUpTo(this, new Intent(this, ImageListActivity.class));
-        return true;
+    	case R.id.addTag:
+    		final Dialog dialog = new Dialog(this);
+    		  dialog.setContentView(R.layout.add_tag);
+    		  dialog.setTitle("Add Tag");
+    		  Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
+    		  dialog.show();
+    		  return true;
+	    case android.R.id.home:
+	    	// This ID represents the Home or Up button. In the case of this
+	        // activity, the Up button is shown. Use NavUtils to allow users
+	        // to navigate up one level in the application structure. For
+	        // more details, see the Navigation pattern on Android Design:
+	        //
+	        // http://developer.android.com/design/patterns/navigation.html#up-vs-back
+	    	//
+	    	NavUtils.navigateUpTo(this, new Intent(this, ImageListActivity.class));
+	        return true;
+	    default:
+	          return false;
     }
-    return super.onOptionsItemSelected(item);
+    //return super.onOptionsItemSelected(item);
   }
+  
+  public boolean onCreateOptionsMenu(Menu menu) {
+	    // Inflate the menu; this adds items to the action bar if it is present.
+	    getMenuInflater().inflate(R.menu.add_tag_inflater, menu);
+	    return true;
+  }
+  
 }

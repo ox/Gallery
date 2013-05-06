@@ -13,4 +13,7 @@
  	<string name="title_image_list">Images</string>
     <string name="title_image_detail">Image Detail</string>
     <string name="a_photo">Add Photo</string>
+    <string name="a_tag">Add Tag</string>
+    <string name="p_tag">Person Tag</string>
+    <string name="l_tag">Location Tag</string>
 </resources>	

@@ -27,18 +27,21 @@ public final class R {
         public static final int list_selector=0x7f020003;
     }
     public static final class id {
-        public static final int action_settings=0x7f080008;
-        public static final int addAlbum=0x7f080007;
-        public static final int addPhoto=0x7f08000b;
-        public static final int dialogButtonOK=0x7f080004;
-        public static final int image_detail=0x7f080006;
+        public static final int action_settings=0x7f08000a;
+        public static final int addAlbum=0x7f08000b;
+        public static final int addPhoto=0x7f08000e;
+        public static final int addTag=0x7f080009;
+        public static final int dialogButtonOK=0x7f080005;
+        public static final int image_detail=0x7f080008;
         public static final int image_detail_container=0x7f080001;
         public static final int image_list=0x7f080002;
         public static final int listview=0x7f080000;
-        public static final int new_album=0x7f080003;
-        public static final int new_title=0x7f080005;
-        public static final int option1=0x7f080009;
-        public static final int option2=0x7f08000a;
+        public static final int location_tag=0x7f080003;
+        public static final int new_album=0x7f080006;
+        public static final int new_title=0x7f080007;
+        public static final int option1=0x7f08000c;
+        public static final int option2=0x7f08000d;
+        public static final int people_tag=0x7f080004;
     }
     public static final class layout {
         public static final int activity_album=0x7f030000;
@@ -60,18 +63,21 @@ public final class R {
          */
         public static final int activity_image_list=0x7f030002;
         public static final int activity_image_twopane=0x7f030003;
-        public static final int album_dialog=0x7f030004;
-        public static final int edit_dialog=0x7f030005;
-        public static final int fragment_image_detail=0x7f030006;
+        public static final int add_tag=0x7f030004;
+        public static final int album_dialog=0x7f030005;
+        public static final int edit_dialog=0x7f030006;
+        public static final int fragment_image_detail=0x7f030007;
     }
     public static final class menu {
-        public static final int album=0x7f070000;
-        public static final int edit=0x7f070001;
-        public static final int photo=0x7f070002;
-        public static final int photoremove=0x7f070003;
+        public static final int add_tag_inflater=0x7f070000;
+        public static final int album=0x7f070001;
+        public static final int edit=0x7f070002;
+        public static final int photo=0x7f070003;
+        public static final int photoremove=0x7f070004;
     }
     public static final class string {
         public static final int a_photo=0x7f05000b;
+        public static final int a_tag=0x7f05000c;
         public static final int action_settings=0x7f050001;
         public static final int add_album=0x7f050005;
         public static final int app_name=0x7f050000;
@@ -79,7 +85,9 @@ public final class R {
         public static final int delete=0x7f050008;
         public static final int edit_name=0x7f050007;
         public static final int hello_world=0x7f050002;
+        public static final int l_tag=0x7f05000e;
         public static final int new_album=0x7f050003;
+        public static final int p_tag=0x7f05000d;
         public static final int the_name=0x7f050006;
         public static final int title_image_detail=0x7f05000a;
         public static final int title_image_list=0x7f050009;
