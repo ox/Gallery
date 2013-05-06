@@ -9,7 +9,7 @@
         android:layout_weight="1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="@string/a_tag" />
+        android:hint="@string/l_tag" />
     <EditText android:id="@+id/people_tag"
         android:layout_weight="1"
         android:layout_width="0dp"
@@ -20,5 +20,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_ok" 
-        />
+    	/>
 </LinearLayout>

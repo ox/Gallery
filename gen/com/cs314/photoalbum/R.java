@@ -27,7 +27,7 @@ public final class R {
         public static final int list_selector=0x7f020003;
     }
     public static final class id {
-        public static final int action_settings=0x7f08000c;
+        public static final int action_settings=0x7f080012;
         public static final int addAlbum=0x7f08000d;
         public static final int addPhoto=0x7f080011;
         public static final int addTag=0x7f08000b;
@@ -37,6 +37,7 @@ public final class R {
         public static final int image_list=0x7f080002;
         public static final int listview=0x7f080000;
         public static final int location_tag=0x7f080003;
+        public static final int move_it=0x7f08000c;
         public static final int new_album=0x7f080006;
         public static final int new_title=0x7f080008;
         public static final int option1=0x7f08000f;
@@ -90,6 +91,7 @@ public final class R {
         public static final int edit_name=0x7f050007;
         public static final int hello_world=0x7f050002;
         public static final int l_tag=0x7f05000e;
+        public static final int move_photo=0x7f050011;
         public static final int new_album=0x7f050003;
         public static final int p_tag=0x7f05000d;
         public static final int search_hint=0x7f050010;

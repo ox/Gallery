@@ -18,4 +18,5 @@
     <string name="l_tag">Location Tag</string>
     <string name="search_photo">Search Photo</string>
     <string name="search_hint">Type Tag</string>
+    <string name="move_photo">Move Photo</string>
 </resources>	

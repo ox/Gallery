@@ -83,6 +83,23 @@ public class ImageDetailActivity extends FragmentActivity {
     		  });
     		  dialog.show();
     		  return true;
+    	case R.id.move_it:
+    		final Dialog dialog2 = new Dialog(this);
+    		  dialog2.setContentView(R.layout.edit_dialog);
+    		  dialog2.setTitle("Move Photo");
+    		  Button dialogButton2 = (Button) dialog2.findViewById(R.id.dialogButtonOK);
+    		  dialogButton2.setOnClickListener(new OnClickListener() {
+    			  @Override
+    				public void onClick(View v) {
+    				  EditText editText = (EditText) dialog2.findViewById(R.id.new_title);
+    				  String albumDestination = editText.getText().toString();
+    				  dialog2.dismiss();
+    				  Toast.makeText(getApplicationContext(),
+    				             albumDestination, Toast.LENGTH_SHORT).show();
+    				}
+    		  });
+    		  dialog2.show();
+    		  return true;
 	    case android.R.id.home:
 	    	// This ID represents the Home or Up button. In the case of this
 	        // activity, the Up button is shown. Use NavUtils to allow users
