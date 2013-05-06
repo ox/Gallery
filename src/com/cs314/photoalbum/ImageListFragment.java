@@ -7,8 +7,6 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.cs314.photoalbum.dummy.DummyContent;
-
 /**
  * A list fragment representing a list of Images. This fragment also supports
  * tablet devices by allowing list items to be given an 'activated' state upon
@@ -101,7 +99,7 @@ public class ImageListFragment extends ListFragment {
     super.onDetach();
 
     // Reset the active callbacks interface to the dummy implementation.
-    mCallbacks = sDummyCallbacks;
+//    mCallbacks = sDummyCallbacks;
   }
 
   @Override
@@ -111,7 +109,7 @@ public class ImageListFragment extends ListFragment {
 
     // Notify the active callbacks interface (the activity, if the
     // fragment is attached to one) that an item has been selected.
-    mCallbacks.onItemSelected(DummyContent.ITEMS.get(position).id);
+//    mCallbacks.onItemSelected(DummyContent.ITEMS.get(position).id);
   }
 
   @Override

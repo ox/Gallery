@@ -79,9 +79,9 @@ public class AlbumActivity extends Activity {
         
         ArrayList<String> photos = albums.get(albumNames.get(position));
         
-        Intent myIntent = new Intent(context, ImageListActivity.class);
-        myIntent.putExtra("photos", photos);
-        startActivity(myIntent);
+        Intent albumDetailIntent = new Intent(context, ImageListActivity.class);
+        albumDetailIntent.putExtra("photos", photos);
+        startActivity(albumDetailIntent);
       }
     }); 
   }

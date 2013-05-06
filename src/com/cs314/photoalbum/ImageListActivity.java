@@ -53,7 +53,6 @@ public class ImageListActivity extends FragmentActivity implements
           R.id.image_list)).setActivateOnItemClick(true);
     }
 
-    // TODO: If exposing deep links into your app, handle intents here.
     Intent intent = getIntent();
     Bundle photos = intent.getExtras();
     ArrayList<String> photoPaths = photos.getStringArrayList("photos");
@@ -88,6 +87,7 @@ public class ImageListActivity extends FragmentActivity implements
    */
   @Override
   public void onItemSelected(String id) {
+    System.err.println("selected id: " + id);
     if (mTwoPane) {
       // In two-pane mode, show the detail view in this activity by
       // adding or replacing the detail fragment using a
