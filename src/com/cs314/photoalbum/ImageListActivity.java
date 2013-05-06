@@ -61,7 +61,6 @@ public class ImageListActivity extends FragmentActivity implements
       // 'activated' state when touched.
       ((ImageListFragment) getSupportFragmentManager().findFragmentById(
           R.id.image_list)).setActivateOnItemClick(true);
-      
     }
 
     Intent intent = getIntent();

@@ -16,4 +16,6 @@
     <string name="a_tag">Add Tag</string>
     <string name="p_tag">Person Tag</string>
     <string name="l_tag">Location Tag</string>
+    <string name="search_photo">Search Photo</string>
+    <string name="search_hint">Type Tag</string>
 </resources>	

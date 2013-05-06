@@ -102,6 +102,9 @@ public class AlbumActivity extends Activity {
 	    case R.id.addAlbum:
 	    	albumDialog();
 	        return true;
+	    case R.id.searchPhoto:
+	    	searchDialog();
+	        return true;
 	    default:
 	        return super.onOptionsItemSelected(item);
 	    }
@@ -124,6 +127,25 @@ public class AlbumActivity extends Activity {
 			  dialog.dismiss();
 			}
 	  });
+	  dialog.show();
+  }
+  public void searchDialog() {
+	  final Dialog dialog = new Dialog(this);
+	  dialog.setContentView(R.layout.search_dialog);
+	  dialog.setTitle("Search by Tag");
+	  Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
+	  /*dialogButton.setOnClickListener(new OnClickListener() {
+		  @Override
+			public void onClick(View v) {
+			  EditText editText = (EditText) dialog.findViewById(R.id.new_album);
+			  String newAlbumName = editText.getText().toString();
+			  albumNames.add(newAlbumName);
+			  ArrayList<String> t1 = new ArrayList<String>();
+			  albums.put(newAlbumName, t1);
+			  adapter.notifyDataSetChanged();
+			  dialog.dismiss();
+			}
+	  });*/
 	  dialog.show();
   }
   public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
