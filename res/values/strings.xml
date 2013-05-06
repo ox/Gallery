@@ -6,5 +6,8 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_image_list">Images</string>
     <string name="title_image_detail">Image Detail</string>
+    <string name="new_album">New Album Name</string>
+    <string name="button_ok">OK</string>
+    <string name="add_album">Add Album</string>
 
 </resources>

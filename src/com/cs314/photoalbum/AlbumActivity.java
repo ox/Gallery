@@ -1,37 +1,36 @@
 package com.cs314.photoalbum;
 
-import java.io.File;
-import java.io.FileFilter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
-import java.util.Set;
 
-import android.net.Uri;
-import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore.MediaColumns;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.util.AttributeSet;
+import android.net.Uri;
+import android.os.Bundle;
+import android.provider.MediaStore.MediaColumns;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
 public class AlbumActivity extends Activity {
-  Hashtable<String, ArrayList<String>> albums = new Hashtable<String, ArrayList<String>>();
   Context context = this;
+  public Hashtable<String, ArrayList<String>> albums = new Hashtable<String, ArrayList<String>>();
+  public ArrayList<String> albumNames = new ArrayList<String>();
+  public ListView listview;
+  public ArrayAdapter<String> adapter;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -60,15 +59,15 @@ public class AlbumActivity extends Activity {
       }
     }
 
-    final ArrayList<String> albumNames = new ArrayList<String>();
     for (String key : albums.keySet()) {
       albumNames.add(key);
     }
-
-    final ListView listview = (ListView) findViewById(R.id.listview);
-    final StableArrayAdapter adapter = new StableArrayAdapter(this,
+    
+    listview = (ListView) findViewById(R.id.listview);
+    adapter = new ArrayAdapter<String>(this,
         android.R.layout.simple_list_item_1, albumNames);
     listview.setAdapter(adapter);
+   
     
     listview.setOnItemClickListener(new OnItemClickListener() {
       @Override
@@ -91,6 +90,34 @@ public class AlbumActivity extends Activity {
     // Inflate the menu; this adds items to the action bar if it is present.
     getMenuInflater().inflate(R.menu.album, menu);
     return true;
+  }
+  public boolean onOptionsItemSelected(MenuItem item) {
+	    // Handle item selection
+	    switch (item.getItemId()) {
+	    case R.id.addAlbum:
+	    	albumDialog();
+	        return true;
+	    default:
+	        return super.onOptionsItemSelected(item);
+	    }
+	}
+ 
+  public void albumDialog() {
+	  final Dialog dialog = new Dialog(this);
+	  dialog.setContentView(R.layout.album_dialog);
+	  dialog.setTitle("Create New Album");
+	  Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
+	  dialogButton.setOnClickListener(new OnClickListener() {
+		  @Override
+			public void onClick(View v) {
+			  EditText editText = (EditText) dialog.findViewById(R.id.edit_album);
+			  String newAlbumName = editText.getText().toString();
+			  albumNames.add(newAlbumName);
+			  adapter.notifyDataSetChanged();
+			  dialog.dismiss();
+			}
+	  });
+	  dialog.show();
   }
   
   private class StableArrayAdapter extends ArrayAdapter<String> {
