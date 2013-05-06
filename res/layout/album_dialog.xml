@@ -11,8 +11,9 @@
         android:layout_height="wrap_content"
         android:hint="@string/new_album" />
     <Button
+        android:id="@+id/dialogButtonOK"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_ok" 
-        android:onClick="addToList"/>
+        />
 </LinearLayout>

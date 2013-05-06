@@ -15,15 +15,20 @@ import android.provider.MediaStore.MediaColumns;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
 public class AlbumActivity extends Activity {
-  Hashtable<String, ArrayList<String>> albums = new Hashtable<String, ArrayList<String>>();
+  public Hashtable<String, ArrayList<String>> albums = new Hashtable<String, ArrayList<String>>();
+  public ArrayList<String> albumNames = new ArrayList<String>();
+  public ListView listview;
+  public ArrayAdapter<String> adapter;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -52,15 +57,15 @@ public class AlbumActivity extends Activity {
       }
     }
 
-    final ArrayList<String> albumNames = new ArrayList<String>();
     for (String key : albums.keySet()) {
       albumNames.add(key);
     }
-
-    final ListView listview = (ListView) findViewById(R.id.listview);
-    final StableArrayAdapter adapter = new StableArrayAdapter(this,
+    
+    listview = (ListView) findViewById(R.id.listview);
+    adapter = new ArrayAdapter<String>(this,
         android.R.layout.simple_list_item_1, albumNames);
     listview.setAdapter(adapter);
+   
     
     listview.setOnItemClickListener(new OnItemClickListener() {
       @Override
@@ -93,12 +98,25 @@ public class AlbumActivity extends Activity {
 	  final Dialog dialog = new Dialog(this);
 	  dialog.setContentView(R.layout.album_dialog);
 	  dialog.setTitle("Create New Album");
+	  Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
+	  dialogButton.setOnClickListener(new OnClickListener() {
+		  @Override
+			public void onClick(View v) {
+			  EditText editText = (EditText) dialog.findViewById(R.id.edit_album);
+			  String newAlbumName = editText.getText().toString();
+			  albumNames.add(newAlbumName);
+			  adapter.notifyDataSetChanged();
+			  dialog.dismiss();
+			}
+	  });
 	  dialog.show();
   }
   
   public void addToList(View view) {
-	  EditText editText = (EditText) findViewById(R.id.edit_album);
-	  String newAlbumName = editText.getText().toString();
+	  //EditText editText = (EditText) findViewById(R.id.edit_album);
+	  //String newAlbumName = editText.getText().toString();
+	  albumNames.add("testicles");
+	  adapter.notifyDataSetChanged();
   }
   
   private class StableArrayAdapter extends ArrayAdapter<String> {
