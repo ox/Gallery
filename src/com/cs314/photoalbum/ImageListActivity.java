@@ -7,11 +7,15 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
@@ -21,6 +25,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * An activity representing a list of Images. This activity has different
@@ -43,6 +48,7 @@ public class ImageListActivity extends FragmentActivity implements
   private ArrayList<String> photoPaths;
   private String selectedWord;
   private Bitmap bitmap;
+  private ArrayAdapter<String> adapter;
   private static final int REQUEST_CODE = 1;
 
   /**
@@ -74,8 +80,8 @@ public class ImageListActivity extends FragmentActivity implements
     Intent intent = getIntent();
     Bundle photos = intent.getExtras();
     photoPaths = photos.getStringArrayList("photos");
-    
-    final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+    selectedWord = photos.getString("selected");
+    adapter = new ArrayAdapter<String>(this,
         android.R.layout.simple_list_item_1, photoPaths);
     
     ((ImageListFragment) getSupportFragmentManager().findFragmentById(
@@ -129,22 +135,24 @@ public class ImageListActivity extends FragmentActivity implements
    */
   @Override
   public void onActivityResult(int requestCode, int resultCode, Intent data) {
-      if (requestCode == 1 && resultCode == Activity.RESULT_OK)
-          try {
-              // We need to recyle unused bitmaps
-              if (bitmap != null) {
-                  bitmap.recycle();
-              }
-              InputStream stream = getContentResolver().openInputStream(
-                      data.getData());
-              bitmap = BitmapFactory.decodeStream(stream);
-              stream.close();
-          } catch (FileNotFoundException e) {
-              e.printStackTrace();
-          } catch (IOException e) {
-              e.printStackTrace();
+      if (resultCode == RESULT_OK) {
+          if (requestCode == REQUEST_CODE) {
+              Uri selectedImageUri = data.getData();
+              String selectedImagePath = getPath(selectedImageUri);
+              ArrayList<String> temp =AlbumActivity.albums.get(selectedWord);
+              temp.add(selectedImagePath);
+              AlbumActivity.albums.remove(selectedWord);
+              AlbumActivity.albums.put(selectedWord,temp);
           }
-      super.onActivityResult(requestCode, resultCode, data);
+      }
+  }
+  public String getPath(Uri uri) {
+      String[] projection = { MediaStore.Images.Media.DATA };
+      Cursor cursor = managedQuery(uri, projection, null, null, null);
+      int column_index = cursor
+              .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+      cursor.moveToFirst();
+      return cursor.getString(column_index);
   }
   @Override
   public void onItemSelected(long id) {

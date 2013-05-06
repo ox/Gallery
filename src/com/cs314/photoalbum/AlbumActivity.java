@@ -33,7 +33,7 @@ import android.widget.Toast;
 
 public class AlbumActivity extends Activity {
   Context context = this;
-  public Hashtable<String, ArrayList<String>> albums = new Hashtable<String, ArrayList<String>>();
+  public static Hashtable<String, ArrayList<String>> albums = new Hashtable<String, ArrayList<String>>();
   public ArrayList<String> albumNames = new ArrayList<String>();
   public ListView listview;
   public ArrayAdapter<String> adapter;
@@ -83,9 +83,12 @@ public class AlbumActivity extends Activity {
              albumNames.get(position), Toast.LENGTH_SHORT).show();
         
         ArrayList<String> photos = albums.get(albumNames.get(position));
-        
+        selectedWord = albumNames.get(position);
+        Bundle extras = new Bundle();
+        extras.putStringArrayList("photos",photos);
+        extras.putString("selected",selectedWord);
         Intent albumDetailIntent = new Intent(context, ImageListActivity.class);
-        albumDetailIntent.putExtra("photos", photos);
+        albumDetailIntent.putExtras(extras);
         startActivity(albumDetailIntent);
       }
     }); 
