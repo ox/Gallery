@@ -46,7 +46,7 @@ import android.widget.Toast;
 public class ImageListActivity extends FragmentActivity implements
 		ImageListFragment.Callbacks {
 
-	private ArrayList<String> photoPaths;
+	public static ArrayList<String> photoPaths;
 	private String selectedWord;
 	private Bitmap bitmap;
 	private ArrayAdapter<String> adapter;
@@ -182,8 +182,11 @@ public class ImageListActivity extends FragmentActivity implements
 			// In single-pane mode, simply start the detail activity
 			// for the selected item ID.
 			Intent detailIntent = new Intent(this, ImageDetailActivity.class);
-			detailIntent.putExtra(ImageDetailFragment.ARG_ITEM_ID,
-					photoPaths.get((int) id));
+			 Bundle extras = new Bundle();
+		     extras.putString(ImageDetailFragment.ARG_ITEM_ID,
+						photoPaths.get((int) id));
+		     extras.putString("selected",selectedWord);
+		     detailIntent.putExtras(extras);
 			startActivity(detailIntent);
 		}
 	}

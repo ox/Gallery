@@ -26,12 +26,17 @@ import android.widget.Toast;
 public class ImageDetailActivity extends FragmentActivity {
 	public String locationTag;
 	public ArrayList<String> peopleTags = new ArrayList<String>();
-
+	public String path;
+	public String selectedWord;
+	
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_image_detail);
-
+    Intent intent = getIntent();
+	Bundle photos = intent.getExtras();
+    path = photos.getString(ImageDetailFragment.ARG_ITEM_ID);
+    selectedWord = photos.getString("selected");
     // Show the Up button in the action bar.
     // getActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -93,9 +98,21 @@ public class ImageDetailActivity extends FragmentActivity {
     				public void onClick(View v) {
     				  EditText editText = (EditText) dialog2.findViewById(R.id.new_title);
     				  String albumDestination = editText.getText().toString();
-    				  dialog2.dismiss();
-    				  Toast.makeText(getApplicationContext(),
-    				             albumDestination, Toast.LENGTH_SHORT).show();
+    				 
+    				  if(AlbumActivity.albums.get(albumDestination) != null) {
+    					  ArrayList<String> temp=AlbumActivity.albums.get(albumDestination);
+    					  temp.add(path); 
+    					  AlbumActivity.albums.remove(albumDestination);
+    					  AlbumActivity.albums.put(albumDestination, temp);
+    					  dialog2.dismiss();
+    					  ArrayList<String> temp2=AlbumActivity.albums.get(selectedWord);
+    					  temp2.remove(path); 
+    					  AlbumActivity.albums.remove(selectedWord);
+    					  AlbumActivity.albums.put(selectedWord, temp2);
+    					  
+
+    				  }
+    				  
     				}
     		  });
     		  dialog2.show();
