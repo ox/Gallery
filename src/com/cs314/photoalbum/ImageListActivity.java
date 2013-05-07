@@ -47,10 +47,10 @@ public class ImageListActivity extends FragmentActivity implements
 		ImageListFragment.Callbacks {
 
 	public static ArrayList<String> photoPaths;
-	private String selectedWord;
-	private Bitmap bitmap;
-	private ArrayAdapter<String> adapter;
-	private static final int REQUEST_CODE = 1;
+	public static String selectedWord;
+	public static Bitmap bitmap;
+	public static ArrayAdapter<String> adapter;
+	public static final int REQUEST_CODE = 1;
 
 	/**
 	 * Whether or not the activity is in two-pane mode, i.e. running on a tablet

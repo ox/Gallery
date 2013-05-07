@@ -83,7 +83,7 @@ public class ImageDetailActivity extends FragmentActivity {
     					  peopleTags.add(peopleInput);
     				  dialog.dismiss();
     				  Toast.makeText(getApplicationContext(),
-    				             locationTag, Toast.LENGTH_SHORT).show();
+ 				             locationTag+" added", Toast.LENGTH_SHORT).show();
     				}
     		  });
     		  dialog.show();
@@ -109,8 +109,6 @@ public class ImageDetailActivity extends FragmentActivity {
     					  temp2.remove(path); 
     					  AlbumActivity.albums.remove(selectedWord);
     					  AlbumActivity.albums.put(selectedWord, temp2);
-    					  
-
     				  }
     				  
     				}

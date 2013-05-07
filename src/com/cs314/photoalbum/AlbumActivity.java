@@ -36,7 +36,7 @@ public class AlbumActivity extends Activity {
   public static Hashtable<String, ArrayList<String>> albums = new Hashtable<String, ArrayList<String>>();
   public ArrayList<String> albumNames = new ArrayList<String>();
   public ListView listview;
-  public ArrayAdapter<String> adapter;
+  public static ArrayAdapter<String> adapter;
   public String selectedWord;
   
   @Override
